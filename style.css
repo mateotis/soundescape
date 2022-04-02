@@ -1,3 +1,36 @@
 body {
 	background-color: black;
 }
+
+.intro {
+	display: flex;
+	flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	margin: auto;
+	margin-top: 15%;
+	text-align: center;
+	color: white;
+}
+
+#room2 {
+	display: none;
+}
+
+.elevator-buttons {
+	display: grid;
+	margin: auto;
+	margin-top: 15%;
+	gap: 1px;
+	grid-template-columns: repeat(2, 2em);
+	justify-content: center;
+	align-content: center;
+	color: white;
+    padding: 10px;
+  }
+
+  .elevator-buttons > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    font-size: 30px;
+  }

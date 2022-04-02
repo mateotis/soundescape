@@ -9,17 +9,45 @@
 		<script src = "script.js" defer></script>
 	</head>
 	<body>
+		<div class = "intro" id = "intro">
+			<h1>sound(e)scape</h1>
+			<h3>Click to begin</h3>
+		</div>
 		<div class = "room" id = "room1">
+			<audio loop id = "alarmclock">
+				<source src="alarmclock.mp3" type="audio/mpeg">
+			</audio>
 			<audio id = "footsteps">
 				<source src="footsteps.mp3" type="audio/mpeg">
 			</audio>
 			<audio id = "thud">
 				<source src="thud.mp3" type="audio/mpeg">
 			</audio>
-			<audio id = "door-opening">
-				<source src="door-opening.mp3" type="audio/mpeg">
+			<audio id = "elevator-open">
+				<source src="elevator-open.mp3" type="audio/mpeg">
 			</audio>
 		</div>
+
+		 <div class = "room" id = "room2">
+			 <audio id = "talking">
+				 <source src="talking.mp3" type="audio/mpeg">
+			 </audio>
+			 <audio id = "elevator-move">
+				 <source src="elevator-move.mp3" type="audio/mpeg">
+			 </audio>
+
+			<div class="elevator-buttons">
+				<div class="button fake-button">1</div>
+				<div class="button fake-button">2</div>
+				<div class="button fake-button">3</div>
+				<div class="button fake-button">4</div>
+				<div class="button fake-button">5</div>
+				<div class="button fake-button">6</div>
+				<div class="button real-button">7</div>
+				<div class="button fake-button">8</div>
+				<div class="button fake-button">9</div>
+			</div>
+		 </div>
 
 	</body>
 </html>
