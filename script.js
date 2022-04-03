@@ -18,12 +18,17 @@ document.body.addEventListener('click', (event) => {
 		$("#intro").fadeOut();
 		currentRoom = 1;
 		alarmClock.play();
+
+		setTimeout(function(){
+			$("#guide-1").fadeIn();
+		}, 2000);
 	}
 })
 
 document.body.addEventListener('keydown', (event) => {
 
 	if(event.key == "w" && currentRoom != 0 && specialEvent == false) {
+		$("#guide-2").fadeOut();
 		footsteps.play();
 		stepCounter += 1;
 	}
@@ -42,7 +47,12 @@ document.body.addEventListener('keydown', (event) => {
 			if(stepCounter == 0) {
 				alarmClock.pause();
 				thud.play();
+				$("#guide-1").fadeOut();
 				specialEvent = false;
+
+				setTimeout(function(){
+					$("#guide-2").fadeIn();
+				}, 2000);
 			}
 			else if(stepCounter >= 150) {
 				elevatorOpen.play();
@@ -60,9 +70,9 @@ document.body.addEventListener('keydown', (event) => {
 	else if(currentRoom == 3) {
 		talking.pause();
 		let talkVolume = (stepCounter * 1.0) / 150;
-		console.log((stepCounter * 1.0) / 150);
 		//talking.volume = Math.min(talkVolume, 1);
-		talking.volume = 0.1;
+		talking.volume = Math.min(talkVolume, 1.0);
+		console.log(talking.volume);
 		talking.play();
 
 		if(event.key == "w") {
@@ -92,5 +102,9 @@ $(document).ready(function() {
 	$(".real-button").click(function() {
 		elevatorMove.play();
 		currentRoom = 3;
+
+		setTimeout(function(){
+			$("#room2").fadeOut();
+		}, 28000);
 	});
 });
