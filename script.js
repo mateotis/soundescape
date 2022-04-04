@@ -20,7 +20,11 @@ document.body.addEventListener('click', (event) => {
 		alarmClock.play();
 
 		setTimeout(function(){
-			$("#guide-1").fadeIn();
+			$("#guide-1-1").fadeIn(function() {
+				setTimeout(function(){
+					$("#guide-1-2").fadeIn();
+				}, 1000);
+			});
 		}, 2000);
 	}
 })
@@ -29,6 +33,7 @@ document.body.addEventListener('keydown', (event) => {
 
 	if(event.key == "w" && currentRoom != 0 && specialEvent == false) {
 		$("#guide-2").fadeOut();
+		$(".help-box").fadeIn();
 		footsteps.play();
 		stepCounter += 1;
 	}
@@ -51,7 +56,7 @@ document.body.addEventListener('keydown', (event) => {
 				specialEvent = false;
 
 				setTimeout(function(){
-					$("#guide-2").fadeIn();
+					$("#guide-2-2").fadeIn();
 				}, 2000);
 			}
 			else if(stepCounter >= 150) {
@@ -69,8 +74,7 @@ document.body.addEventListener('keydown', (event) => {
 	}
 	else if(currentRoom == 3) {
 		talking.pause();
-		let talkVolume = (stepCounter * 1.0) / 150;
-		//talking.volume = Math.min(talkVolume, 1);
+		let talkVolume = (stepCounter * 1.0) / 500;
 		talking.volume = Math.min(talkVolume, 1.0);
 		console.log(talking.volume);
 		talking.play();
@@ -106,5 +110,20 @@ $(document).ready(function() {
 		setTimeout(function(){
 			$("#room2").fadeOut();
 		}, 28000);
+	});
+});
+
+$(document).ready(function() {
+	$(document).on('mousemove', (event) => {
+		let offset = $(".help-box").offset(); // Where is the element relative to the top-left of the page
+		let height = $(".help-box").height(); // Element height
+		let width = $(".help-box").width(); // Element width
+
+		if(offset.left < event.clientX && event.clientX < (offset.left + width) && offset.top < event.clientY && event.clientY < (offset.top + height)) { // The actual math - all these relations together ensure that our mouse is within said flashback prompt before triggering the flashback
+			$('.help-text').css("opacity","1"); // Only set to 0.8 opacity for that "memory" feeling
+		}
+		else {
+			$('.help-text').css("opacity", "0");
+		}
 	});
 });
