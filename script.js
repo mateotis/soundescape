@@ -109,7 +109,7 @@ $(document).ready(function() {
 		for (let i=0; i<9; i++) {
 			if (i === 6) {
 				let buttonElem = document.getElementsByClassName("button")[i];
-				$(buttonElem).css('color', 'gold');
+				$(buttonElem).css('color', 'yellow');
 			}
 			else {
 				let buttonElem = document.getElementsByClassName("button")[i];
