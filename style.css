@@ -49,6 +49,7 @@ body {
 	transition: opacity 1s ease-in-out; /* 2 sec fade in/out animation that is triggered when the opacity is changed */
 	-moz-transition: opacity 1s ease-in-out; /* For portability */
 	-webkit-transition: opacity 1s ease-in-out;
+	font-size: 50px;
 }
 
 #room2 {

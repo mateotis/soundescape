@@ -106,7 +106,16 @@ $(document).ready(function() {
 	$(".real-button").click(function() {
 		elevatorMove.play();
 		currentRoom = 3;
-
+		for (let i=0; i<9; i++) {
+			if (i === 6) {
+				let buttonElem = document.getElementsByClassName("button")[i];
+				$(buttonElem).css('color', 'gold');
+			}
+			else {
+				let buttonElem = document.getElementsByClassName("button")[i];
+				$(buttonElem).animate({opacity: 0});
+			}
+		}
 		setTimeout(function(){
 			$("#room2").fadeOut();
 		}, 28000);
