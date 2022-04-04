@@ -2,7 +2,7 @@ body {
 	background-color: black;
 }
 
-.intro {
+/* .intro {
 	display: flex;
 	flex-direction: column;
     justify-content: center;
@@ -11,6 +11,12 @@ body {
 	margin-top: 15%;
 	text-align: center;
 	color: white;
+} */
+
+#intro{
+	width: 200px;
+	  height: 300px;
+	  object-fit: contain;
 }
 
 .guide {
