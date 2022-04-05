@@ -15,7 +15,7 @@ body {
 } */
 
 #intro {
-	margin-top: -35%;
+	margin-top: 5%;
 }
 
 #intro img {
@@ -28,7 +28,7 @@ body {
 .guide {
 	color: white;
 	text-align: center;
-	margin-top: -30%;
+	margin-top: 10%;
 	/*margin-top: 10%;*/
 	/*display: none;*/
 }
@@ -45,7 +45,6 @@ body {
 }
 
 #guide-4-1 {
-	margin-top: -70%;
 }
 
 .help-box {
@@ -62,6 +61,11 @@ body {
 
 .help-text {
 	/*display: none;*/
+	position: absolute; /* This was the missing ingredient - makes the help pics appear above other elements */
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
 	opacity: 0;
 	transition: opacity 1s ease-in-out; /* 2 sec fade in/out animation that is triggered when the opacity is changed */
 	-moz-transition: opacity 1s ease-in-out; /* For portability */
@@ -95,13 +99,11 @@ body {
 	color: black;
 	width: 100vw;
 	height: 100vh;
-	margin-top: -50%;
 }
 
 .elevator-buttons {
 	display: grid;
 	margin: auto;
-	margin-top: -15%;
 	gap: 1px;
 	grid-template-columns: repeat(2, 2em);
 	justify-content: center;

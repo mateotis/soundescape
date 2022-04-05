@@ -165,6 +165,7 @@ document.body.addEventListener('keydown', (event) => {
 			currentRoom = 5;
 
 			$("#instructions").hide();
+			$(".help-text").css("margin-top", "-10%");
 			$("#hints").css("display", "block"); // For some reason, .show() sets it to inline instead of block, which is not good
 
 			$("#room5").fadeIn();
