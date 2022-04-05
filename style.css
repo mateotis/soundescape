@@ -1,138 +1,127 @@
 body {
-	background-color: black;
-	overflow: hidden;
+    background-color: black;
+    overflow: hidden;
 }
 
-/* .intro {
-	display: flex;
-	flex-direction: column;
-    justify-content: center;
-    align-items: center;
-	margin: auto;
-	margin-top: 15%;
-	text-align: center;
-	color: white;
-} */
-
 #intro {
-	margin-top: 5%;
+    margin-top: 5%;
 }
 
 #intro img {
-	display: block;
+    display: block;
     margin-left: auto;
     margin-right: auto;
     width: 35%;
 }
 
 .guide {
-	color: white;
-	text-align: center;
-	margin-top: 10%;
-	/*margin-top: 10%;*/
-	/*display: none;*/
+    color: white;
+    text-align: center;
+    margin-top: 10%;
+    /*margin-top: 10%;*/
+    /*display: none;*/
 }
 
 .guide img {
-	width: 75%;
-	height: 25%;
-	display: none;
+    width: 75%;
+    height: 25%;
+    display: none;
 }
 
 #guide-3-1 {
-	width: 50%;
-	margin-top: -5%;
+    width: 50%;
+    margin-top: -5%;
 }
 
 #guide-4-1 {
 }
 
 .help-box {
-	position: absolute;
-	display: none;
-	top: 2%;
-	right: 1%;
+    position: absolute;
+    display: none;
+    top: 2%;
+    right: 1%;
 }
 
 #question-mark {
-	width: 50px;
-	height: 50px;
+    width: 50px;
+    height: 50px;
 }
 
 .help-text {
-	/*display: none;*/
-	position: absolute; /* This was the missing ingredient - makes the help pics appear above other elements */
-	left:0;
-	right:0;
-	margin-left:auto;
-	margin-right:auto;
-	opacity: 0;
-	transition: opacity 1s ease-in-out; /* 2 sec fade in/out animation that is triggered when the opacity is changed */
-	-moz-transition: opacity 1s ease-in-out; /* For portability */
-	-webkit-transition: opacity 1s ease-in-out;
+    /*display: none;*/
+    position: absolute; /* This was the missing ingredient - makes the help pics appear above other elements */
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* 2 sec fade in/out animation that is triggered when the opacity is changed */
+    -moz-transition: opacity 1s ease-in-out; /* For portability */
+    -webkit-transition: opacity 1s ease-in-out;
 }
 
 #instructions {
-	display: block;
+    display: block;
     margin-left: auto;
     margin-right: auto;
-	width: 50%;
+    width: 50%;
 }
 
 #hints {
-	display: none;
-	margin-left: auto;
-	margin-right: auto;
-	width: 50%;
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 .room {
-	display: none;
+    display: none;
 }
 
 #room1 {
-	display: block;
+    display: block;
 }
 
 #room6 {
-	background-color: white;
-	color: black;
-	width: 100vw;
-	height: 100vh;
+    background-color: white;
+    color: black;
+    width: 100vw;
+    height: 100vh;
 }
 
 .elevator-buttons {
-	display: grid;
-	margin: auto;
-	gap: 1px;
-	grid-template-columns: repeat(2, 2em);
-	justify-content: center;
-	align-content: center;
-	color: white;
-	padding: 10px;
+    display: grid;
+    margin: auto;
+    gap: 1px;
+    grid-template-columns: repeat(2, 2em);
+    justify-content: center;
+    align-content: center;
+    color: white;
+    padding: 10px;
 }
 
 .elevator-buttons > div {
-	background-color: rgba(255, 255, 255, 0.8);
-	text-align: center;
-	font-size: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    font-size: 30px;
 }
 
 .number-pad {
-	display: flex;
-	flex-wrap: nowrap;
-	background-color: black;
-	justify-content: center;
-	align-items: center;
-	margin: auto;
-	width: 75%;
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 75%;
 }
 
 .number-pad > div {
-	background-color: white;
-	width: 25%;
-	margin: 10px;
-	text-align: center;
-	line-height: 2em;
-	font-size: 3em;
+    background-color: white;
+    width: 25%;
+    margin: 10px;
+    text-align: center;
+    line-height: 2em;
+    font-size: 3em;
 }
