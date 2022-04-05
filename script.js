@@ -2,7 +2,6 @@ let footsteps = document.getElementById("footsteps");
 let oct4 = document.getElementById("oct4");
 let bump = document.getElementById("bump");
 let thud = document.getElementById("thud");
-let oct4 = document.getElementById("oct4");
 let up = document.getElementById("up");
 let alarmClock = document.getElementById("alarmclock");
 
