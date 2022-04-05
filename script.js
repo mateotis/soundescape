@@ -1,10 +1,17 @@
 let footsteps = document.getElementById("footsteps");
+let bump = document.getElementById("bump");
 let thud = document.getElementById("thud");
 let doorOpening = document.getElementById("door-opening");
 let alarmClock = document.getElementById("alarmclock");
+
 let elevatorOpen = document.getElementById("elevator-open");
 let elevatorMove = document.getElementById("elevator-move");
+
 let talking = document.getElementById("talking");
+
+let piano = document.getElementById("piano");
+let drums = document.getElementById("drums");
+let violin = document.getElementById("violin");
 
 let stepCounter = 0;
 let currentRoom = 0;
@@ -41,7 +48,11 @@ document.body.addEventListener('keydown', (event) => {
 
 	if(currentRoom == 1) {
 		if(event.key == "w") {
-			if(stepCounter > 150) {
+			if(stepCounter == 75) {
+				bump.volume = 0.7; // Because the glass shattering was a little too loud...
+				bump.play();
+			}
+			else if(stepCounter > 150) {
 				footsteps.pause();
 				thud.play();
 				specialEvent = true;
@@ -111,6 +122,37 @@ document.body.addEventListener('keydown', (event) => {
 		if(event.key == "w") {
 			stepCounter += 1;
 		}
+		else if(event.key == " ") {
+			stepCounter = 0;
+			currentRoom = 4;
+			talking.pause();
+			thud.play();
+		}
+	}
+	else if(currentRoom == 4) {
+		if(stepCounter > 20) {
+			console.log(stepCounter + " starting piano");
+			piano.volume = Math.min((stepCounter * 1.0) / 200, 1.0);
+			piano.play();
+		}
+		if(stepCounter > 70) {
+			console.log(stepCounter + " starting drums");
+			drums.volume = Math.min((stepCounter * 1.0) / 250, 1.0);
+			drums.play();
+		}
+		if(stepCounter > 120) {
+			console.log(stepCounter + " starting violin");
+			violin.volume = Math.min((stepCounter * 1.0) / 300, 1.0);
+			violin.play();
+		}
+		if(stepCounter > 200) {
+			thud.play();
+			piano.pause();
+			drums.pause();
+			violin.pause();
+			stepCounter = 0;
+			currentRoom = 5;
+		}
 	}
 
 
@@ -129,7 +171,7 @@ $(document).ready(function() {
 		let width = $(".help-box").width(); // Element width
 
 		if(offset.left < event.clientX && event.clientX < (offset.left + width) && offset.top < event.clientY && event.clientY < (offset.top + height)) { // The actual math - all these relations together ensure that our mouse is within said flashback prompt before triggering the flashback
-			$('.help-text').css("opacity","1"); // Only set to 0.8 opacity for that "memory" feeling
+			$('.help-text').css("opacity","1");
 		}
 		else {
 			$('.help-text').css("opacity", "0");
