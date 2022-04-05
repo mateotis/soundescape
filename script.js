@@ -1,6 +1,8 @@
 let footsteps = document.getElementById("footsteps");
+let oct4 = document.getElementById("oct4");
 let bump = document.getElementById("bump");
 let thud = document.getElementById("thud");
+let oct4 = document.getElementById("oct4");
 let up = document.getElementById("up");
 let alarmClock = document.getElementById("alarmclock");
 
@@ -55,9 +57,15 @@ document.body.addEventListener('keydown', (event) => {
 //room 1 - bedroom
     if (currentRoom == 1) {
         if (event.key == "w") {
+            if(stepCounter == 15){
+                oct4.play();
+            }
             if (stepCounter == 75) {
                 bump.volume = 0.7; // Because the glass shattering was a little too loud...
                 bump.play(); //glass shatter sound
+                if(stepCounter == 15){
+                    oct4.play();
+                }
             } else if (stepCounter > 150) { //you have reached the elevator door
                 footsteps.pause();
                 thud.play(); //you are walking into a wall silly
@@ -226,7 +234,7 @@ document.body.addEventListener('keydown', (event) => {
             }
         }
 
-        if (event.key == "Backspace") { //you can delete a numer you input
+        if (event.key == "Backspace") { //you can delete a number you input
             for (let i = 3; i > -1; i--) {
                 if (document.getElementsByClassName("number")[i].innerHTML != 0) {
                     document.getElementsByClassName("number")[i].innerHTML = 0;
@@ -237,8 +245,6 @@ document.body.addEventListener('keydown', (event) => {
             }
         }
     }
-
-
 })
 
 document.body.addEventListener('keyup', (event) => { //pause footsteps when not pressing w

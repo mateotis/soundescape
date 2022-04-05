@@ -84,10 +84,17 @@ body {
 }
 
 #room6 {
-    background-color: white;
     color: black;
     width: 100vw;
     height: 100vh;
+	background-color: black;
+}
+
+#end img{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+		width: 35%;
 }
 
 .elevator-buttons {
