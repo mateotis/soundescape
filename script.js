@@ -1,3 +1,4 @@
+// First step is defining all the audio we use - and there's a lot!
 let footsteps = document.getElementById("footsteps");
 let oct4 = document.getElementById("oct4");
 let bump = document.getElementById("bump");
@@ -17,6 +18,7 @@ let piano = document.getElementById("piano");
 let drums = document.getElementById("drums");
 let violin = document.getElementById("violin");
 
+// As well as some variables we'll refer to
 let stepCounter = 0;
 let currentRoom = 0;
 
@@ -43,35 +45,35 @@ document.body.addEventListener('click', (event) => {
 })
 
 // when you press w, you "move forward"
-// it counts the steps you take so events will trigger when a certain step threshold is reached
-document.body.addEventListener('keydown', (event) => {
+// it counts the steps you take so events will trigger when a certain step threshold is reached, giving the illusion of movement/progress
+document.body.addEventListener('keydown', (event) => { // This is an absolutely massive function, but we did our best to structure it efficiently
 
-    if (event.key == "w" && currentRoom != 0 && currentRoom != 5 && specialEvent == false) {
+    if (event.key == "w" && currentRoom != 0 && currentRoom != 5 && specialEvent == false) { // We can walk freely most times, with a few exceptions
         $("#guide-2").fadeOut(); //hides listen message
         $(".help-box").fadeIn(); //shows the help button in top corner
         footsteps.play();
         stepCounter += 1;
-    }
+	}
 
-//room 1 - bedroom
+	//room 1 - bedroom
     if (currentRoom == 1) {
         if (event.key == "w") {
             if(stepCounter == 15){
                 oct4.play();
             }
-            if (stepCounter == 75) {
+            if (stepCounter == 100) {
                 bump.volume = 0.7; // Because the glass shattering was a little too loud...
                 bump.play(); //glass shatter sound
                 if(stepCounter == 15){
                     oct4.play();
                 }
-            } else if (stepCounter > 150) { //you have reached the elevator door
+            } else if (stepCounter > 200) { //you have reached the elevator door
                 footsteps.pause();
                 thud.play(); //you are walking into a wall silly
-                specialEvent = true;
+                specialEvent = true; // The special event flag is used to lock us in one event or another without being able to move
             }
         } else if (event.key == " ") { //turn off alarm, get up
-            if (stepCounter == 0) { //if space is pressed with no footsteps, turn off alarm, else, open elevator
+            if (stepCounter == 0) { //if space is pressed with no footsteps (aka at the start), turn off alarm, else, open elevator
                 alarmClock.pause();
                 thud.play(); // you smack the alarm clock
                 $("#guide-1").fadeOut(); //hide all the intro text
@@ -86,8 +88,9 @@ document.body.addEventListener('keydown', (event) => {
                             $("#guide-2-2").fadeIn(); //show "listen" message
                         }, 1000);
                     });
-                }, 2000);
-            } else if (stepCounter >= 150) { //open elevator, move to next room
+                }, 2000); // We make judicious use of timeouts in this site, syncing up our scarce visuals with the sounds (or just for dramatic effect)
+
+            } else if (stepCounter >= 200) { //open elevator, move to next room
                 elevatorOpen.play();
                 currentRoom = 2;
                 stepCounter = 0;
@@ -105,7 +108,7 @@ document.body.addEventListener('keydown', (event) => {
     else if (currentRoom == 2) {
         let pressedKey = parseInt(event.key);
         if (pressedKey == 7) { //if 7 is pressed, proceed to next room
-            realButtonClick.play();
+            realButtonClick.play(); // The real click comes from the same root sound as the fake one, but pitched down in Audacity
             elevatorMove.play();
 
             $("#guide-3-1").fadeOut();
@@ -131,10 +134,8 @@ document.body.addEventListener('keydown', (event) => {
     }
     //room 3 - friends place
     else if (currentRoom == 3) {
-        console.log(stepCounter);
         // start dialogue with friend
         if (stepCounter > 30 && dialoguePlayed == false) {
-            console.log("Dialogue triggered");
             dialogue.play();
             specialEvent = true;
             dialoguePlayed = true;
@@ -142,7 +143,6 @@ document.body.addEventListener('keydown', (event) => {
                 specialEvent = false;
             }, 40000);
         } else if (stepCounter > 80) { //open door to room 4 when dialogue is over
-            console.log("Room 3 door triggered");
             footsteps.pause();
             thud.play();
             specialEvent = true;
@@ -160,17 +160,14 @@ document.body.addEventListener('keydown', (event) => {
     //room 4 - auditorium
     else if (currentRoom == 4) { //start playing the components to the "song", gets louder as you walk more
         if (stepCounter > 20) {
-            console.log(stepCounter + " starting piano");
-            piano.volume = Math.min((stepCounter * 1.0) / 200, 1.0); //converts step to float to make the sounds louder as you get closer
+            piano.volume = Math.min((stepCounter * 1.0) / 200, 1.0); //converts step to float percentage to make the sounds louder as you get closer
             piano.play();
         }
         if (stepCounter > 120) {
-            console.log(stepCounter + " starting drums");
-            drums.volume = Math.min((stepCounter * 1.0) / 300, 1.0);
+            drums.volume = Math.min((stepCounter * 1.0) / 300, 1.0); // The min function makes sure we don't overflow above 100% volume
             drums.play();
         }
         if (stepCounter > 220) {
-            console.log(stepCounter + " starting violin");
             violin.volume = Math.min((stepCounter * 1.0) / 400, 1.0);
             violin.play();
         }
@@ -196,32 +193,31 @@ document.body.addEventListener('keydown', (event) => {
             $("#guide-4-1").fadeIn(); //message about inputting numbers
         }
 
-        let pressedKey = parseInt(event.key);
+        let pressedKey = parseInt(event.key); // Parse the input key, make sure it's a number
         if (!isNaN(pressedKey) && pressedKey != 0) {
-            console.log("Pressed key is " + pressedKey);
-            for (let i = 0; i < 4; i++) {
-                if (document.getElementsByClassName("number")[i].innerHTML == 0) {
+            for (let i = 0; i < 4; i++) { // Iterate over the number pads
+                if (document.getElementsByClassName("number")[i].innerHTML == 0) { // If any of them are 0 (the default value), insert the input number there
                     document.getElementsByClassName("number")[i].innerHTML = pressedKey;
                     password[i] = pressedKey;
-                    console.log("Changed position " + i + " to " + pressedKey);
 
                     if (i == 3) { //correct code is 4713
                         // 4 on alarm clock
                         // 7 on elevator
                         // 1 spoon of sugar
                         // 3 instruments playing
-                        if (password[0] == 4 && password[1] == 7 && password[2] == 1 && password[3] == 3) { //right password! youre free!
-                            realButtonClick.play();
-                            console.log("Correct password!");
-                            currentRoom = 6;
-                            setTimeout(function () {
-                                $("#room5").fadeOut(function () {
-                                    $("#room6").fadeIn();
-                                });
-                            }, 1000);
+                        if (password[0] == 4 && password[1] == 7 && password[2] == 1 && password[3] == 3) { //right password! you're free!
+							realButtonClick.play();
+							currentRoom = 6;
+							specialEvent = true;
+							setTimeout(function(){
+								$(".help-box").fadeOut();
+								$("#hints").hide();
+								$("#room5").fadeOut(function() {
+									$("#room6").fadeIn();
+								});
+							}, 1000);
                         } else { //wrong password! reset numbers
                             thud.play();
-                            console.log("Wrong password!");
                             for (let j = 0; j < 4; j++) {
                                 document.getElementsByClassName("number")[j].innerHTML = 0;
                             }
@@ -233,12 +229,11 @@ document.body.addEventListener('keydown', (event) => {
             }
         }
 
-        if (event.key == "Backspace") { //you can delete a number you input
-            for (let i = 3; i > -1; i--) {
+        if (event.key == "Backspace") { //you can delete a number you input - it always deletes the first non-zero value
+            for (let i = 3; i > -1; i--) { // This is the first time in my life that I've written a DECREMENTING for loop
                 if (document.getElementsByClassName("number")[i].innerHTML != 0) {
                     document.getElementsByClassName("number")[i].innerHTML = 0;
                     password[i] = 0;
-                    console.log("Removing number at index " + i);
                     break;
                 }
             }
@@ -258,10 +253,16 @@ $(document).ready(function () { //interaction with help box in top right
         let height = $(".help-box").height(); // Element height
         let width = $(".help-box").width(); // Element width
 
-        if (offset.left < event.clientX && event.clientX < (offset.left + width) && offset.top < event.clientY && event.clientY < (offset.top + height)) { // The actual math - all these relations together ensure that our mouse is within said flashback prompt before triggering the flashback
+        if (offset.left < event.clientX && event.clientX < (offset.left + width) && offset.top < event.clientY && event.clientY < (offset.top + height)) { // Hitbox math
             $('.help-text').css("opacity", "1");
         } else {
             $('.help-text').css("opacity", "0");
         }
     });
+});
+
+$(document).ready(function() { // Print your certificate of escape!
+	$("#end").click(function() {
+		window.print();
+	});
 });

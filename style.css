@@ -9,7 +9,7 @@ body {
 
 #intro img {
     display: block;
-    margin-left: auto;
+    margin-left: auto; /* We center most images */
     margin-right: auto;
     width: 35%;
 }
@@ -18,8 +18,6 @@ body {
     color: white;
     text-align: center;
     margin-top: 10%;
-    /*margin-top: 10%;*/
-    /*display: none;*/
 }
 
 .guide img {
@@ -29,11 +27,8 @@ body {
 }
 
 #guide-3-1 {
-    width: 50%;
+    width: 50%; /* Special styling is needed for the elevator prompt because of the grid */
     margin-top: -5%;
-}
-
-#guide-4-1 {
 }
 
 .help-box {
@@ -49,14 +44,13 @@ body {
 }
 
 .help-text {
-    /*display: none;*/
     position: absolute; /* This was the missing ingredient - makes the help pics appear above other elements */
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
     opacity: 0;
-    transition: opacity 1s ease-in-out; /* 2 sec fade in/out animation that is triggered when the opacity is changed */
+    transition: opacity 1s ease-in-out; /* 1 sec fade in/out animation that is triggered when the opacity is changed */
     -moz-transition: opacity 1s ease-in-out; /* For portability */
     -webkit-transition: opacity 1s ease-in-out;
 }
@@ -83,13 +77,6 @@ body {
     display: block;
 }
 
-#room6 {
-    color: black;
-    width: 100vw;
-    height: 100vh;
-	background-color: black;
-}
-
 #end {
 	display: block;
 	margin-left: auto;
@@ -101,8 +88,8 @@ body {
     display: grid;
     margin: auto;
     gap: 1px;
-    grid-template-columns: repeat(2, 2em);
-    justify-content: center;
+    grid-template-columns: repeat(2, 2em); /* Separate the buttons into two columns, 2ems apart */
+    justify-content: center; /* Align both the grid itself and the numbers within it to the center */
     align-content: center;
     color: white;
     padding: 10px;
@@ -115,7 +102,7 @@ body {
 }
 
 .number-pad {
-    display: flex;
+    display: flex; /* Whereas the elevator was grid, the password numbers are flex - we have a bit of everything in here! */
     flex-wrap: nowrap;
     background-color: black;
     justify-content: center;
@@ -124,11 +111,11 @@ body {
     width: 75%;
 }
 
-.number-pad > div {
+.number-pad > div { /* By using this syntax, we don't need to name the children divs (we still do for JS reasons, but we don't need to) */
     background-color: white;
     width: 25%;
     margin: 10px;
     text-align: center;
-    line-height: 2em;
+    line-height: 2em; /* Another way of vertically centering text */
     font-size: 3em;
 }
