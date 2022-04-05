@@ -57,11 +57,11 @@ document.body.addEventListener('keydown', (event) => {
 			if(stepCounter == 15){
 				oct4.play();
 			}
-			if(stepCounter == 75) {
+			if(stepCounter == 100) {
 				bump.volume = 0.7; // Because the glass shattering was a little too loud...
 				bump.play();
 			}
-			else if(stepCounter > 150) {
+			else if(stepCounter > 200) {
 				footsteps.pause();
 				thud.play();
 				specialEvent = true;
@@ -145,19 +145,24 @@ document.body.addEventListener('keydown', (event) => {
 		else if(stepCounter > 80) {
 			console.log("Room 3 door triggered");
 			footsteps.pause();
-			thud.play();
 			specialEvent = true;
+
+			if(event.key == "w") {
+				thud.play();
+			}
+
+			if(event.key == " ") {
+				doorOpening.play();
+
+				setTimeout(function() {
+					stepCounter = 0;
+					currentRoom = 4;
+					specialEvent = false;
+				}, 3000);
+			}
 		}
 
-		if(event.key == " ") {
-			doorOpening.play();
 
-			setTimeout(function() {
-				stepCounter = 0;
-				currentRoom = 4;
-				specialEvent = false;
-			}, 3000);
-		}
 	}
 	else if(currentRoom == 4) {
 		if(stepCounter > 20) {
@@ -189,12 +194,10 @@ document.body.addEventListener('keydown', (event) => {
 			$("#hints").css("display", "block"); // For some reason, .show() sets it to inline instead of block, which is not good
 
 			$("#room5").fadeIn();
+			$("#guide-4-1").fadeIn();
 		}
 	}
 	else if(currentRoom == 5) {
-		if(event.key == "w") {
-			$("#guide-4-1").fadeIn();
-		}
 
 		let pressedKey = parseInt(event.key);
 		if(!isNaN(pressedKey) && pressedKey != 0) {
@@ -210,7 +213,9 @@ document.body.addEventListener('keydown', (event) => {
 							realButtonClick.play();
 							console.log("Correct password!");
 							currentRoom = 6;
+							specialEvent = true;
 							setTimeout(function(){
+								$(".help-box").fadeOut();
 								$("#room5").fadeOut(function() {
 									$("#room6").fadeIn();
 								});
@@ -263,5 +268,11 @@ $(document).ready(function() {
 		else {
 			$('.help-text').css("opacity", "0");
 		}
+	});
+});
+
+$(document).ready(function() {
+	$("#end").click(function() {
+		window.print();
 	});
 });
