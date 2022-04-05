@@ -106,7 +106,6 @@ document.body.addEventListener('keydown', (event) => {
 				if (i === 6) {
 					let buttonElem = document.getElementsByClassName("button")[i];
 					$(buttonElem).css('color', 'yellow');
-					// $(buttonElem).playKeyframe('flicker 5s linear 0s infinite', alternate);
 				}
 				else {
 					let buttonElem = document.getElementsByClassName("button")[i];
@@ -245,15 +244,3 @@ $(document).ready(function() {
 		}
 	});
 });
-
-$.keyframe.define([{
-	name: 'flicker',
-	'0%': {'filter': 'drop-shadow(0 0 0px rgba(255,255,0, 50))'},
-	'20%': {'filter': 'drop-shadow(0 0 0.8rem rgba(255,255,0, 50))'},
-	'58%': {'filter': 'drop-shadow(0 0 0.8rem rgba(255,255,0, 50))'},
-	'60%': {'filter': 'none'},
-	'62%': {'filter': 'drop-shadow(0 0 0.8rem rgba(255,255,0, 50))'},
-	'70%': {'filter': 'none'},
-	'72%': {'filter': 'drop-shadow(0 0 0.8rem rgba(255,255,0, 50))'},
-	'100%': {'filter': 'drop-shadow(0 0 0.8rem rgba(255,255,0, 50))'}
-}]);
