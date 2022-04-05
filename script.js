@@ -56,7 +56,11 @@ document.body.addEventListener('keydown', (event) => {
 				specialEvent = false;
 
 				setTimeout(function(){
-					$("#guide-2-2").fadeIn();
+					$("#guide-2-1").fadeIn(function() {
+						setTimeout(function(){
+							$("#guide-2-2").fadeIn();
+						}, 1000);
+					});
 				}, 2000);
 			}
 			else if(stepCounter >= 150) {
@@ -71,6 +75,31 @@ document.body.addEventListener('keydown', (event) => {
 			}
 		}
 
+	}
+	else if(currentRoom == 2) {
+		let pressedKey = parseInt(event.key);
+		if(pressedKey == 7) {
+			elevatorMove.play();
+			currentRoom = 3;
+			for (let i=0; i<9; i++) {
+				if (i === 6) {
+					let buttonElem = document.getElementsByClassName("button")[i];
+					$(buttonElem).css('color', 'yellow');
+				}
+				else {
+					let buttonElem = document.getElementsByClassName("button")[i];
+					$(buttonElem).animate({opacity: 0});
+				}
+			}
+			setTimeout(function(){
+				$("#room2").fadeOut();
+			}, 28000);
+		}
+		else if(!isNaN(pressedKey) && pressedKey != 0) {
+			thud.play();
+			let buttonElement = document.getElementsByClassName("button")[pressedKey - 1]; // The number on the button corresponds to its order in the HTML, so we can use it as a handy index
+			$(buttonElement).animate({ opacity: 0 }); // Doing this instead of fadeOut() keeps the hidden element's "place" in the display
+		}
 	}
 	else if(currentRoom == 3) {
 		talking.pause();
@@ -92,35 +121,6 @@ document.body.addEventListener('keyup', (event) => {
 	  footsteps.pause();
   }
 })
-
-$(document).ready(function() {
-	$(".fake-button").click(function() {
-		thud.play();
-		let buttonIndex = parseInt($(this).text());
-		let buttonElement = document.getElementsByClassName("button")[buttonIndex - 1]; // The number on the button corresponds to its order in the HTML, so we can use it as a handy index
-		$(buttonElement).animate({ opacity: 0 }); // Doing this instead of fadeOut() keeps the hidden element's "place" in the display
-	});
-});
-
-$(document).ready(function() {
-	$(".real-button").click(function() {
-		elevatorMove.play();
-		currentRoom = 3;
-		for (let i=0; i<9; i++) {
-			if (i === 6) {
-				let buttonElem = document.getElementsByClassName("button")[i];
-				$(buttonElem).css('color', 'yellow');
-			}
-			else {
-				let buttonElem = document.getElementsByClassName("button")[i];
-				$(buttonElem).animate({opacity: 0});
-			}
-		}
-		setTimeout(function(){
-			$("#room2").fadeOut();
-		}, 28000);
-	});
-});
 
 $(document).ready(function() {
 	$(document).on('mousemove', (event) => {

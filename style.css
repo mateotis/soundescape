@@ -1,6 +1,6 @@
 body {
 	background-color: black;
-	/*overflow: hidden;*/
+	overflow: hidden;
 }
 
 /* .intro {
@@ -14,17 +14,21 @@ body {
 	color: white;
 } */
 
+#intro {
+	margin-top: -35%;
+}
+
 #intro img {
 	display: block;
     margin-left: auto;
     margin-right: auto;
-	margin-top: 5%;
     width: 35%;
 }
 
 .guide {
 	color: white;
 	text-align: center;
+	margin-top: -30%;
 	/*margin-top: 10%;*/
 	/*display: none;*/
 }
@@ -48,13 +52,7 @@ body {
 }
 
 .help-text {
-	/* position: absolute;
-	top: 0;
-	color: white;
-	width: 100%;
-	left: 0px;
-	text-align: center;
-	margin-top: 15%; */
+	/*display: none;*/
 	opacity: 0;
 	transition: opacity 1s ease-in-out; /* 2 sec fade in/out animation that is triggered when the opacity is changed */
 	-moz-transition: opacity 1s ease-in-out; /* For portability */
@@ -75,7 +73,7 @@ body {
 .elevator-buttons {
 	display: grid;
 	margin: auto;
-	margin-top: 15%;
+	margin-top: -30%;
 	gap: 1px;
 	grid-template-columns: repeat(2, 2em);
 	justify-content: center;
