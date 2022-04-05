@@ -1,6 +1,7 @@
 let footsteps = document.getElementById("footsteps");
 let bump = document.getElementById("bump");
 let thud = document.getElementById("thud");
+let up = document.getElementById("up");
 let doorOpening = document.getElementById("door-opening");
 let alarmClock = document.getElementById("alarmclock");
 
@@ -15,6 +16,7 @@ let violin = document.getElementById("violin");
 
 let stepCounter = 0;
 let currentRoom = 0;
+
 
 let specialEvent = true;
 let alarmSilenced = false;
@@ -65,6 +67,11 @@ document.body.addEventListener('keydown', (event) => {
 				thud.play();
 				$("#guide-1").fadeOut();
 				specialEvent = false;
+
+				up.play();
+				up.loop = false;
+
+
 
 				setTimeout(function(){
 					$("#guide-2-1").fadeIn(function() {
