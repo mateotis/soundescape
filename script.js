@@ -19,10 +19,10 @@ let violin = document.getElementById("violin");
 let stepCounter = 0;
 let currentRoom = 0;
 
-
 let specialEvent = true;
 let alarmSilenced = false;
 
+const password = [0, 0, 0, 0];
 
 document.body.addEventListener('click', (event) => {
 	if(currentRoom == 0) {
@@ -42,7 +42,7 @@ document.body.addEventListener('click', (event) => {
 
 document.body.addEventListener('keydown', (event) => {
 
-	if(event.key == "w" && currentRoom != 0 && specialEvent == false) {
+	if(event.key == "w" && currentRoom != 0 && currentRoom != 5 && specialEvent == false) {
 		$("#guide-2").fadeOut();
 		$(".help-box").fadeIn();
 		footsteps.play();
@@ -89,6 +89,7 @@ document.body.addEventListener('keydown', (event) => {
 
 				setTimeout(function(){
 					$("#room2").fadeIn();
+					$("#guide-3-1").fadeIn();
 				}, 4000);
 			}
 		}
@@ -99,6 +100,7 @@ document.body.addEventListener('keydown', (event) => {
 		if(pressedKey == 7) {
 			realButtonClick.play();
 			elevatorMove.play();
+			$("#guide-3-1").fadeOut();
 			currentRoom = 3;
 			for (let i=0; i<9; i++) {
 				if (i === 6) {
@@ -158,13 +160,64 @@ document.body.addEventListener('keydown', (event) => {
 			piano.pause();
 			drums.pause();
 			violin.pause();
+
 			stepCounter = 0;
 			currentRoom = 5;
+
+			$("#instructions").hide();
+			$("#hints").css("display", "block"); // For some reason, .show() sets it to inline instead of block, which is not good
+
+			$("#room5").fadeIn();
 		}
 	}
 	else if(currentRoom == 5) {
 		if(event.key == "w") {
-			$("#guide-3-1").fadeIn();
+			$("#guide-4-1").fadeIn();
+		}
+
+		let pressedKey = parseInt(event.key);
+		if(!isNaN(pressedKey) && pressedKey != 0) {
+			console.log("Pressed key is " + pressedKey);
+			for (let i = 0; i < 4; i++) {
+				if(document.getElementsByClassName("number")[i].innerHTML == 0) {
+					document.getElementsByClassName("number")[i].innerHTML = pressedKey;
+					password[i] = pressedKey;
+					console.log("Changed position " + i + " to " + pressedKey);
+
+					if(i == 3) {
+						if(password[0] == 4 && password[1] == 7 && password[2] == 1 && password[3] == 3) {
+							realButtonClick.play();
+							console.log("Correct password!");
+							currentRoom = 6;
+							setTimeout(function(){
+								$("#room5").fadeOut(function() {
+									$("#room6").fadeIn();
+								});
+							}, 1000);
+						}
+						else {
+							thud.play();
+							console.log("Wrong password!");
+							for (let j = 0; j < 4; j++) {
+								document.getElementsByClassName("number")[j].innerHTML = 0;
+							}
+						}
+					}
+
+					break;
+				}
+			}
+		}
+
+		if(event.key == "Backspace") {
+			for (let i = 3; i > -1; i--) {
+				if(document.getElementsByClassName("number")[i].innerHTML != 0) {
+					document.getElementsByClassName("number")[i].innerHTML = 0;
+					password[i] = 0;
+					console.log("Removing number at index " + i);
+					break;
+				}
+			}
 		}
 	}
 
