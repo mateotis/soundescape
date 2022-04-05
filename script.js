@@ -88,7 +88,7 @@ document.body.addEventListener('keydown', (event) => {
 				specialEvent = false;
 
 				setTimeout(function(){
-				    $("#room2").fadeIn();
+					$("#room2").fadeIn();
 				}, 4000);
 			}
 		}
@@ -172,9 +172,9 @@ document.body.addEventListener('keydown', (event) => {
 })
 
 document.body.addEventListener('keyup', (event) => {
-  if(event.key == 'w') {
-	  footsteps.pause();
-  }
+	if(event.key == 'w') {
+		footsteps.pause();
+	}
 })
 
 $(document).ready(function() {
@@ -191,3 +191,15 @@ $(document).ready(function() {
 		}
 	});
 });
+
+$.keyframe.define([{
+	name: 'flicker',
+	'0%': {'filter': 'drop-shadow(0 0 0px rgba(255,255,0, 50))'},
+	'20%': {'filter': 'drop-shadow(0 0 0.8rem rgba(255,255,0, 50))'},
+	'58%': {'filter': 'drop-shadow(0 0 0.8rem rgba(255,255,0, 50))'},
+	'60%': {'filter': 'none'},
+	'62%': {'filter': 'drop-shadow(0 0 0.8rem rgba(255,255,0, 50))'},
+	'70%': {'filter': 'none'},
+	'72%': {'filter': 'drop-shadow(0 0 0.8rem rgba(255,255,0, 50))'},
+	'100%': {'filter': 'drop-shadow(0 0 0.8rem rgba(255,255,0, 50))'}
+}]);
