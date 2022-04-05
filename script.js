@@ -2,6 +2,7 @@ let footsteps = document.getElementById("footsteps");
 let bump = document.getElementById("bump");
 let thud = document.getElementById("thud");
 let up = document.getElementById("up");
+let oct4 = document.getElementById("oct4");
 let doorOpening = document.getElementById("door-opening");
 let alarmClock = document.getElementById("alarmclock");
 
@@ -52,9 +53,15 @@ document.body.addEventListener('keydown', (event) => {
 
 	if(currentRoom == 1) {
 		if(event.key == "w") {
+			if(stepCounter == 15){
+				oct4.play();
+			}
 			if(stepCounter == 75) {
 				bump.volume = 0.7; // Because the glass shattering was a little too loud...
 				bump.play();
+				if(stepCounter == 15){
+					oct4.play();
+				}
 			}
 			else if(stepCounter > 150) {
 				footsteps.pause();
