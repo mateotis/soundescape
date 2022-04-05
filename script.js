@@ -2,8 +2,6 @@ let footsteps = document.getElementById("footsteps");
 let bump = document.getElementById("bump");
 let thud = document.getElementById("thud");
 let up = document.getElementById("up");
-let oct4 = document.getElementById("oct4");
-let doorOpening = document.getElementById("door-opening");
 let alarmClock = document.getElementById("alarmclock");
 
 let elevatorOpen = document.getElementById("elevator-open");
@@ -11,7 +9,8 @@ let elevatorMove = document.getElementById("elevator-move");
 let fakeButtonClick = document.getElementById("fake-button-click");
 let realButtonClick = document.getElementById("real-button-click");
 
-let talking = document.getElementById("talking");
+let dialogue = document.getElementById("dialogue");
+let doorOpening = document.getElementById("door-opening");
 
 let piano = document.getElementById("piano");
 let drums = document.getElementById("drums");
@@ -22,6 +21,7 @@ let currentRoom = 0;
 
 let specialEvent = true;
 let alarmSilenced = false;
+let dialoguePlayed = false;
 
 const password = [0, 0, 0, 0];
 
@@ -53,15 +53,9 @@ document.body.addEventListener('keydown', (event) => {
 
 	if(currentRoom == 1) {
 		if(event.key == "w") {
-			if(stepCounter == 15){
-				oct4.play();
-			}
 			if(stepCounter == 75) {
 				bump.volume = 0.7; // Because the glass shattering was a little too loud...
 				bump.play();
-				if(stepCounter == 15){
-					oct4.play();
-				}
 			}
 			else if(stepCounter > 150) {
 				footsteps.pause();
@@ -107,9 +101,12 @@ document.body.addEventListener('keydown', (event) => {
 		if(pressedKey == 7) {
 			realButtonClick.play();
 			elevatorMove.play();
+
 			$("#guide-3-1").fadeOut();
 			currentRoom = 3;
-			for (let i=0; i<9; i++) {
+			stepCounter = 0;
+
+			for (let i = 0; i < 9; i++) {
 				if (i === 6) {
 					let buttonElem = document.getElementsByClassName("button")[i];
 					$(buttonElem).css('color', 'yellow');
@@ -130,20 +127,32 @@ document.body.addEventListener('keydown', (event) => {
 		}
 	}
 	else if(currentRoom == 3) {
-		talking.pause();
-		let talkVolume = (stepCounter * 1.0) / 500;
-		talking.volume = Math.min(talkVolume, 1.0);
-		console.log(talking.volume);
-		talking.play();
+		console.log(stepCounter);
 
-		if(event.key == "w") {
-			stepCounter += 1;
+		if(stepCounter > 30 && dialoguePlayed == false) {
+			console.log("Dialogue triggered");
+			dialogue.play();
+			specialEvent = true;
+			dialoguePlayed = true;
+			setTimeout(function() { // Wait for the dialogue to end; no escape until then!
+				specialEvent = false;
+			}, 40000);
 		}
-		else if(event.key == " ") {
-			stepCounter = 0;
-			currentRoom = 4;
-			talking.pause();
+		else if(stepCounter > 80) {
+			console.log("Room 3 door triggered");
+			footsteps.pause();
 			thud.play();
+			specialEvent = true;
+		}
+
+		if(event.key == " ") {
+			doorOpening.play();
+
+			setTimeout(function() {
+				stepCounter = 0;
+				currentRoom = 4;
+				specialEvent = false;
+			}, 3000);
 		}
 	}
 	else if(currentRoom == 4) {
@@ -172,7 +181,7 @@ document.body.addEventListener('keydown', (event) => {
 			currentRoom = 5;
 
 			$("#instructions").hide();
-			$(".help-text").css("margin-top", "-10%");
+			$(".help-text").css("margin-top", "-10%"); // Fix misalignment of the hints box
 			$("#hints").css("display", "block"); // For some reason, .show() sets it to inline instead of block, which is not good
 
 			$("#room5").fadeIn();
