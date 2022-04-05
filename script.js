@@ -7,6 +7,8 @@ let alarmClock = document.getElementById("alarmclock");
 
 let elevatorOpen = document.getElementById("elevator-open");
 let elevatorMove = document.getElementById("elevator-move");
+let fakeButtonClick = document.getElementById("fake-button-click");
+let realButtonClick = document.getElementById("real-button-click");
 
 let talking = document.getElementById("talking");
 
@@ -71,8 +73,6 @@ document.body.addEventListener('keydown', (event) => {
 				up.play();
 				up.loop = false;
 
-
-
 				setTimeout(function(){
 					$("#guide-2-1").fadeIn(function() {
 						setTimeout(function(){
@@ -97,6 +97,7 @@ document.body.addEventListener('keydown', (event) => {
 	else if(currentRoom == 2) {
 		let pressedKey = parseInt(event.key);
 		if(pressedKey == 7) {
+			realButtonClick.play();
 			elevatorMove.play();
 			currentRoom = 3;
 			for (let i=0; i<9; i++) {
@@ -115,7 +116,7 @@ document.body.addEventListener('keydown', (event) => {
 			}, 28000);
 		}
 		else if(!isNaN(pressedKey) && pressedKey != 0) {
-			thud.play();
+			fakeButtonClick.play();
 			let buttonElement = document.getElementsByClassName("button")[pressedKey]; // The number on the button corresponds to its order in the HTML, so we can use it as a handy index
 			$(buttonElement).animate({ opacity: 0 }); // Doing this instead of fadeOut() keeps the hidden element's "place" in the display
 		}
@@ -143,23 +144,28 @@ document.body.addEventListener('keydown', (event) => {
 			piano.volume = Math.min((stepCounter * 1.0) / 200, 1.0);
 			piano.play();
 		}
-		if(stepCounter > 70) {
+		if(stepCounter > 120) {
 			console.log(stepCounter + " starting drums");
-			drums.volume = Math.min((stepCounter * 1.0) / 250, 1.0);
+			drums.volume = Math.min((stepCounter * 1.0) / 300, 1.0);
 			drums.play();
 		}
-		if(stepCounter > 120) {
+		if(stepCounter > 220) {
 			console.log(stepCounter + " starting violin");
-			violin.volume = Math.min((stepCounter * 1.0) / 300, 1.0);
+			violin.volume = Math.min((stepCounter * 1.0) / 400, 1.0);
 			violin.play();
 		}
-		if(stepCounter > 200) {
+		if(stepCounter > 400) {
 			thud.play();
 			piano.pause();
 			drums.pause();
 			violin.pause();
 			stepCounter = 0;
 			currentRoom = 5;
+		}
+	}
+	else if(currentRoom == 5) {
+		if(event.key == "w") {
+			$("#guide-3-1").fadeIn();
 		}
 	}
 
