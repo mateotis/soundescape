@@ -100,7 +100,7 @@ document.body.addEventListener('keydown', (event) => {
 			realButtonClick.play();
 			elevatorMove.play();
 			currentRoom = 3;
-			for (let i=0; i<9; i++) {
+			for (let i=0; i<10; i++) {
 				if (i === 7) {
 					let buttonElem = document.getElementsByClassName("button")[i];
 					$(buttonElem).css('color', 'yellow');
