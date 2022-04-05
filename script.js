@@ -100,9 +100,10 @@ document.body.addEventListener('keydown', (event) => {
 			elevatorMove.play();
 			currentRoom = 3;
 			for (let i=0; i<9; i++) {
-				if (i === 6) {
+				if (i === 7) {
 					let buttonElem = document.getElementsByClassName("button")[i];
 					$(buttonElem).css('color', 'yellow');
+					// $(buttonElem).playKeyframe('flicker 5s linear 0s infinite', alternate);
 				}
 				else {
 					let buttonElem = document.getElementsByClassName("button")[i];
@@ -115,7 +116,7 @@ document.body.addEventListener('keydown', (event) => {
 		}
 		else if(!isNaN(pressedKey) && pressedKey != 0) {
 			thud.play();
-			let buttonElement = document.getElementsByClassName("button")[pressedKey - 1]; // The number on the button corresponds to its order in the HTML, so we can use it as a handy index
+			let buttonElement = document.getElementsByClassName("button")[pressedKey]; // The number on the button corresponds to its order in the HTML, so we can use it as a handy index
 			$(buttonElement).animate({ opacity: 0 }); // Doing this instead of fadeOut() keeps the hidden element's "place" in the display
 		}
 	}
