@@ -70,6 +70,12 @@ body {
 	display: none;
 }
 
+#button {
+	display: block;
+		margin-top: auto;
+		width: 35%;
+}
+
 .elevator-buttons {
 	display: grid;
 	margin: auto;
