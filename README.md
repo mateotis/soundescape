@@ -11,6 +11,9 @@ We started off our process by designing the first two rooms on the website: the 
 
 Since the four of us knew what each room was already, it was hard to detect what someone else might not find clear. Some of us let our friends play the game and noticed where and how they struggled. We gained more perspective as to what should be fixed and added for the website to be interactive and clear even with a blank screen. 
 
+All visuals were created by us: the animated texts were drawn in Procreate, while the elevator buttons and numpad were constructed with CSS Grid and Flexbox respectively. We also recorded a number of sounds using a Zoom H4n recorder. The soundscape in room three (with the dialogue mixed with sounds of chairs scraping and tea being poured) was made entirely out of original sounds, put together in Audacity. The door opening from room three to four was also original. For the elevator clicks, we recorded the sound of the campus elevator buttons and pitched it differently for effect.
+We acquired all other sounds from Freesound and edited them in Audacity. In the first room, for example, we gave a glitchy aftershock to Siri's voice and combined the sounds of bumping into a table and a glass shattering for the user to stumble on. We also converted all WAV files to MP3 for space efficiency.
+
 ## Reflection
 The process of building this website from start to finish taught us valuable lessons on creating interactive spaces using sounds: something that is always in the background but adds depth and understanding to each project. It was really fun to take something experienced in a real-life setting and turn it into a puzzle to solve online! Escape room games in reality are always creative and can range from anything to escaping prison to traveling through time. 
 
